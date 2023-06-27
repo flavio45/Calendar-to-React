@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import React, { useEffect } from "react";
+import { CalendarHeader } from "../CalendarHeader/CalendarHeader";
 
 export const App = () => {
   const [nav, setNav] = useState(0);
@@ -20,6 +21,7 @@ export const App = () => {
 
   return (
     <div id="container">
+      <CalendarHeader />
       <div id="weekdays">
         <div>Sunday</div>
         <div>Monday</div>
