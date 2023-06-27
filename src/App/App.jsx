@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import React, { useEffect } from "react";
 import { CalendarHeader } from "../CalendarHeader/CalendarHeader";
+import { Day } from "../Day/Day";
 
 export const App = () => {
   const [nav, setNav] = useState(0);
@@ -22,6 +23,7 @@ export const App = () => {
   return (
     <div id="container">
       <CalendarHeader />
+
       <div id="weekdays">
         <div>Sunday</div>
         <div>Monday</div>
@@ -31,7 +33,20 @@ export const App = () => {
         <div>Friday</div>
         <div>Saturday</div>
       </div>
-      <div id="calendar"></div>
+
+      <div id="calendar">
+        {days.map((d, index) => (
+          <Day
+            key={index}
+            day={d}
+            onClick={() => {
+              if (day.value !== "padding") {
+                setClicked(day.date);
+              }
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 };
