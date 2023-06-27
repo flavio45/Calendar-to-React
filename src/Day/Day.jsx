@@ -1,14 +1,10 @@
 import React from "react";
 
-export const Day = () => {
+export const Day = ({ day, onClick }) => {
   return (
-    <div id="header">
-      <div id="monthDisplay"></div>
-
-      <div>
-        <button id="backButton">Back</button>
-        <button id="nextButton">Next</button>
-      </div>
+    <div className="day">
+      {day.value === "padding" ? "" : day.value}
+      {day.event && <div className="event">{day.event.title}</div>}
     </div>
   );
 };
