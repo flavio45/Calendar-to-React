@@ -121,6 +121,17 @@ export const App = () => {
           }}
         />
       )}
+
+      {clicked && eventForDate(clicked) && (
+        <DeleteEvent
+          eventText={eventForDate(clicked).title}
+          onClose={() => setClicked(null)}
+          onDelete={() => {
+            setEvents(events.filter((e) => e.date !== clicked));
+            setClicked(null);
+          }}
+        />
+      )}
     </>
   );
 };
