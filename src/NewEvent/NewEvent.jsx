@@ -20,6 +20,7 @@ export const NewEvent = ({ onSave, onClose }) => {
           onClick={() => {
             if (title) {
               setError(false);
+              onSave(title);
             } else {
               setError(true);
             }
