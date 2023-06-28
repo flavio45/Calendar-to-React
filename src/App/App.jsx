@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { CalendarHeader } from "../CalendarHeader/CalendarHeader";
 import { Day } from "../Day/Day";
+import { NewEvent } from "../NewEvent";
+import { DeleteEvent } from "../DeleteEvent";
 
 export const App = () => {
   const [nav, setNav] = useState(0);
@@ -81,32 +83,44 @@ export const App = () => {
   }, [events, nav]);
 
   return (
-    <div id="container">
-      <CalendarHeader />
+    <>
+      <div id="container">
+        <CalendarHeader />
 
-      <div id="weekdays">
-        <div>Sunday</div>
-        <div>Monday</div>
-        <div>Tuesday</div>
-        <div>Wednesday</div>
-        <div>Thursday</div>
-        <div>Friday</div>
-        <div>Saturday</div>
+        <div id="weekdays">
+          <div>Sunday</div>
+          <div>Monday</div>
+          <div>Tuesday</div>
+          <div>Wednesday</div>
+          <div>Thursday</div>
+          <div>Friday</div>
+          <div>Saturday</div>
+        </div>
+
+        <div id="calendar">
+          {days.map((d, index) => (
+            <Day
+              key={index}
+              day={d}
+              onClick={() => {
+                if (d.value !== "padding") {
+                  setClicked(d.date);
+                }
+              }}
+            />
+          ))}
+        </div>
       </div>
 
-      <div id="calendar">
-        {days.map((d, index) => (
-          <Day
-            key={index}
-            day={d}
-            onClick={() => {
-              if (day.value !== "padding") {
-                setClicked(day.date);
-              }
-            }}
-          />
-        ))}
-      </div>
-    </div>
+      {clicked && !eventForDate(clicked) && (
+        <NewEvent
+          onClose={() => setClicked(null)}
+          onSave={(title) => {
+            setEvents([...events, { title, date: clicked }]);
+            setClicked(null);
+          }}
+        />
+      )}
+    </>
   );
 };
